@@ -14,6 +14,11 @@
         <Icon type="ios-people"></Icon>
         <router-link to="/manger/add">管理图书</router-link>
     </Menu-item>
+      <Menu-item name="4">
+        <Icon type="ios-cart-outline"></Icon>
+        <router-link to="/cart">购物车</router-link>
+        <Badge :count="num" class-name="demo-badge-alone" ></Badge>
+      </Menu-item>
     </Menu>
     <div>
     </div>
@@ -23,9 +28,17 @@
 </template>
 
 <script>
-
+ import {mapGetters} from 'vuex'
 export default {
   name: 'app',
+  computed: {
+    ...mapGetters({
+      buyBooks: 'buyBooks'
+    }),
+    num(){
+      return this.buyBooks.length
+    }
+  }
 
 }
 </script>

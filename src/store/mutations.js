@@ -1,4 +1,4 @@
-import {BOOK_ADD, BOOK_DELETE,BOOK_UPDATE} from './types'
+import {BOOK_ADD, BOOK_DELETE,BOOK_UPDATE,BUY_BOOK,CANCEL_BUY} from './types'
  const  mutations ={
   [BOOK_ADD](state,book){
     if(state.bookInfo.length == 0){
@@ -20,6 +20,30 @@ import {BOOK_ADD, BOOK_DELETE,BOOK_UPDATE} from './types'
         return book
       }
     })
-  }
+  },
+  [BUY_BOOK](state,book){
+    console.log(book)
+   if(!book.num){
+      book.num =1;
+     state.added.push(book)
+   }else{
+     state.added.find(item=>{
+            if(item.id == book.id){
+         item.num++
+       }
+
+     })
+
+   }
+    console.log(state.added)
+
+   },
+   [CANCEL_BUY](state,id){
+    state.added = state.added.filter(item=>{
+      if(item.id == id)item.num = 0
+      return item.id != id
+    })
+     console.log(state.added)
+   }
 }
 export default mutations

@@ -7,6 +7,7 @@ import Manger from '../components/Manger.vue'
 import Detail from '../components/Detail.vue'
 import Update from '../components/Update.vue'
 import Delete from '../components/Delete.vue'
+import Cart from '../components/Cart.vue'
 
 Vue.use(Router);
 
@@ -34,12 +35,17 @@ const routes = [
         path:'delete',
         component:Delete
       }
+
    ]
   },
   {
     path:'/detail/:id',
     name:'detail',
     component:Detail
+  },
+  {
+    path:'/cart',
+    component:Cart
   }
 ]
 

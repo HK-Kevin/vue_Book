@@ -5,7 +5,7 @@
       <p slot="title" class="text">{{bookDetail.bookName}}</p>
       <img class="bookimg" :src="bookDetail.imgUrl" alt="">
       <p class="text">售价：{{bookDetail.price}}</p>
-      <Button class="text" type="primary" size="small">加入购物车</Button>
+      <Button class="text" type="primary" size="small" @click="buy(bookDetail)">加入购物车</Button>
     </Card>
     </Col>
   </div>
@@ -25,6 +25,11 @@
           return item.id == bId
         })
       }
+    },
+    methods:{
+        buy(book){
+          this.$store.dispatch('buyBook',book)
+        }
     }
   }
 </script>
