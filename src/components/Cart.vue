@@ -28,12 +28,12 @@
           },
           {
             title: '合计',
-            key: 'sum',
+            key: 'sum1',
             width: 150,
             align: 'center',
-            render: (row, column, index) => {
-              this.sum += row.price * row.num;
-              return row.price * row.num
+            render: (h, params) => {
+             return h('span', {
+               }, (params.row.price*params.row.num))
             }
           },
           {
@@ -41,8 +41,18 @@
             key: 'action',
             width: 150,
             align: 'center',
-            render: (row, column, index) => {
-              return `<i-button type="error" size="small" @click="removeBook(${row.id},${row.num},${row.price})">删除</i-button>`
+            render: (h, params) => {
+              return h('Button', {
+                props: {
+                  type: 'error',
+                  size: 'small'
+                },
+                on: {
+                  click: () => {
+                    this.removeBook(params.row.id,params.row.num,params.row.price)
+                  }
+                }
+              }, '删除')
             }
           }
         ]
@@ -65,9 +75,7 @@
     },
     methods: {
       removeBook(id, num, price){
-
         this.sum = this.sum - num * price;
-        console.log(this.sum, num * price)
         this.$store.dispatch('cancelBook', id)
       }
     }
